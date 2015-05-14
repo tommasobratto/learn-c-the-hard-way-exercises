@@ -1,5 +1,5 @@
 # Learn C The Hard Way - Exercises
-I'm currently trying to complete the book [Learn C The Hard Way](http://c.learncodethehardway.org/book/), as a way to learn a lower level language and as a starting point to understand a different perspective on programming and software development to what I've done with Web technologies until now.
+I'm currently trying to complete the book [Learn C The Hard Way](http://c.learncodethehardway.org/book/), as a way to learn a lower level language and as a starting point to understand a different perspective on programming and software development to what I've done with Web technologies in the last 3 months.
 
 I'll be adding notes as I go along, with my personal issues and ways of trying to understand the various concepts that relate to C's unique way of expressing things.
 
