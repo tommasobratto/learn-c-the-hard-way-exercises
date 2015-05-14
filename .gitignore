@@ -1,0 +1,9 @@
+*
+!.gitignore
+!Makefile
+!appendix/
+!exercises/
+!appendix/*.md
+!appendix/*.c
+!exercises/*.md
+!exercises/*.c
