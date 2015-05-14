@@ -10,7 +10,7 @@
 
 // define pre-proc constant values
 #define MAX_DATA 512
-#define max_rows 100
+#define MAX_ROWS 100
 
 // create an address struct for an example User registration form
 struct Address {
@@ -22,7 +22,7 @@ struct Address {
 
 // create a database struct
 struct Database {
-    struct Address rows[max_rows];
+    struct Address rows[MAX_ROWS];
 };
 
 // create a database connection struct
@@ -33,18 +33,6 @@ struct Connection {
     // by the connection struct
     struct Database *db;
 };
-
-void Database_close(struct Connection *conn)
-{
-    if(conn) {
-        // Close file
-        if(conn->file) fclose(conn->file);
-        // Free allocated memory for database struct inside connection struct
-        if(conn->db) free(conn->db);
-        // Free allocated memory for connection struct
-        free(conn);
-    }
-}
 
 // create an exit function to terminate the program
 // if there are any errors
@@ -138,13 +126,12 @@ void Database_write(struct Connection *conn)
     if(rc == -1) die("Cannot flush database.");
 }
 
-void Database_create(struct Connection *conn, int rows)
+void Database_create(struct Connection *conn)
 {
     int i = 0;
-    max_rows = rows;
 
     // for each row make a prototype address (template)
-    for(i = 0; i < max_rows); i++) {
+    for(i = 0; i < MAX_ROWS; i++) {
         struct Address addr = {.id = i, .set = 0};
         // assign it to the database
         conn->db->rows[i] = addr;
@@ -206,7 +193,7 @@ void Database_list(struct Connection *conn)
     struct Database *db = conn->db;
 
     // for each row check current address for a 'cur->set value'
-    for(i = 0; i < max_rows; i++) {
+    for(i = 0; i < MAX_ROWS; i++) {
         struct Address *cur = &db->rows[i];
 
         if(cur->set) {
@@ -234,13 +221,12 @@ int main(int argc, char *argv[])
     // to equal it to id
     if(argc > 3) id = atoi(argv[3]);
     // If id is major than the number of rows, it gets rejected
-    if(id >= max_rows) die("There's not that many records");
+    if(id >= MAX_ROWS) die("There's not that many records");
 
     switch(action) {
         // create database
         case 'c':
-            if(argc != 4 || action != atoi(argv[3])) die("Need a database row number");
-            Database_create(conn, rows);
+            Database_create(conn);
             Database_write(conn);
             break;
 
