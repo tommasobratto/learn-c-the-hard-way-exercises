@@ -13,7 +13,7 @@ P.S. "ex2.c" isn't included because it is essentially the same as "ex1.c"
 - change directory: ```cd exercises```
 - run ```make all```
 - run any exercise by typing (example): ```./ex1```
-- for the "appendix" folder, type ``` make ``` and the name of the exercise you want to compile, then run it using the command above
+- for the "appendix" folder, type ``` make ``` and the name of the exercise you want to compile (example: ```make appxA.c```), then run it using the command above
 
 ### TODO/Index of Exercises: 
 
