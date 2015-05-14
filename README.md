@@ -3,6 +3,9 @@ I'm currently trying to complete the book [Learn C The Hard Way](http://c.learnc
 
 I'll be adding notes as I go along, with my personal issues and ways of trying to understand the various concepts that relate to C's unique way of expressing things.
 
+### Note: 
+As I started this to "fool around a bit", the comments sometimes aren't written really well, the naming conventions are a bit confusing (for example: "ex14a.c") and not all of the committed exercises are done and working (especially my own), but I'm working on cleaning it up a bit and making it readable, for the moment.
+
 ### TODO/Index of Exercises: 
 
 - [x] Exercise 1: Dust Off That Compiler
@@ -54,3 +57,10 @@ I'll be adding notes as I go along, with my personal issues and ways of trying t
 - [ ] Exercise 47: A Fast URL Router
 
 (NOTE: The last 5 exercises "A Tiny Virtual Machine" haven't been written, since the book is a work in progress)
+
+### Instructions
+- clone the repo by typing ```git clone git@github.com:tommasobratto/learn-c-the-hard-way-exercises.git```
+- change directory: ```cd exercises```
+- run ```make all```
+- run any exercise by typing (example): ```./ex1```
+- for the "appendix" folder, type ``` make ``` and the name of the exercise you want to compile, then run it using the command above
