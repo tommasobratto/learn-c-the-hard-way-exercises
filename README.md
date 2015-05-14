@@ -6,7 +6,7 @@ I'll be adding notes as I go along, with my personal issues and ways of trying t
 ### Note: 
 As I started this to "fool around a bit", the comments sometimes aren't written really well, the naming conventions are a bit confusing (for example: "ex14a.c") and not all of the committed exercises are done and working (especially my own), but I'm working on cleaning it up a bit and making it readable, for the moment.
 
-### Instructions
+### Instructions:
 - clone the repo by typing ```git clone git@github.com:tommasobratto/learn-c-the-hard-way-exercises.git```
 - change directory: ```cd exercises```
 - run ```make all```
