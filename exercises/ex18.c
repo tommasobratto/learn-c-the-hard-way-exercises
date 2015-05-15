@@ -43,8 +43,8 @@ int *bubble_sort(int *numbers, int count, compare_cb cmp)
     /* memcpy(dst, src, n);
      * ===================
      * 'memcpy' copies 'n' bytes from memory 'src' to memory 'dst',
-     * essentially creating what I think is a copy of 'target'
-     * in the 'numbers' pointer */
+     * essentially creating what I think is a copy of the 'numbers'
+     * array in the 'target' one */
     memcpy(target, numbers, count * sizeof(int));
 
     // for each number do i
