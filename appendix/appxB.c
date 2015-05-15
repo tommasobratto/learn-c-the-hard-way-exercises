@@ -1,5 +1,5 @@
-// WIP: trying to create an object constructor with the use of malloc and pointers 
-// It is currently throwing segfaults
+// Trying to create an object constructor with the use of malloc and pointers,
+// giving it an id number and a name as arguments through the command line
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +24,7 @@ void Print_object(struct TestObject *obj)
 struct TestObject *Object_create(int argn, const char *object_name)
 {
     int i = 0;
+
     struct TestObject *obj = malloc(sizeof(struct TestObject));
     if(!obj) exit_func("Memory error");
     

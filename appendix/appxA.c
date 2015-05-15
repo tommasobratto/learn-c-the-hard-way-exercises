@@ -1,3 +1,4 @@
+// Printing info about variable/pointer memory addresses and bytesizes
 #include <stdio.h>
 
 int main(int argc, char *argv[])
