@@ -1,8 +1,7 @@
 /* This is a bubble sorting algorithm program from ex18 of LCTHW.
  * It should be sorting an array of integers in several ways,
- * comparing pairs of adiacent ints in an array and swapping their place
- * if the sorting returns a value greater than zero. 
- *  */
+ * comparing pairs of adiacent numbers in an array and swapping their place
+ * if the sorting returns a value greater than zero. */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,10 +20,13 @@ void die(const char *message)
     exit(1);
 }
 
-// creating a 'fake' type for a function pointer
-// that compares two integers.
-// Functions that are referenced by this pointer define
-// the order of the sorting
+/* Creating a 'fake' type for a function pointer
+ * that compares two integers.
+ * Functions that are referenced by this pointer define
+ * the order of the sorting.
+ * To be considered of the same 'typedef' by the compiler 
+ * the functions must respect the type and number 
+ * of arguments of the pointer function. */
 typedef int (*compare_cb)(int a, int b);
 
 // bubble sort function using pointer to function
@@ -39,7 +41,8 @@ int *bubble_sort(int *numbers, int count, compare_cb cmp)
     if(!target) die("Memory error");
 
     /* memcpy(dst, src, n);
-     * memcpy copies 'n' bytes from memory 'src' to memory 'dst',
+     * ===================
+     * 'memcpy' copies 'n' bytes from memory 'src' to memory 'dst',
      * essentially creating what I think is a copy of 'target'
      * in the 'numbers' pointer */
     memcpy(target, numbers, count * sizeof(int));
@@ -48,10 +51,12 @@ int *bubble_sort(int *numbers, int count, compare_cb cmp)
     for(i = 0; i < count; i++) {
         // and for each number do j
         for(j = 0; j < count; j++) {
-            // if 'compare' returns an int > 0...
-            /* 'cmp' is our pointed to function, that means
+
+            /* 'cmp' is our "pointed to" function, that means
              * we can use any function we want as long as it's 
-             * of the same type and it is an argument of 'bubble_sort' */
+             * of the same type (compare_cb) and it is an argument of 'bubble_sort' */
+
+            // if 'cmp' returns an int > 0...
             if(cmp(target[j], target[j+1]) > 0) {
                 // var temp is equal to second int
                 temp = target[j+1];
@@ -59,15 +64,16 @@ int *bubble_sort(int *numbers, int count, compare_cb cmp)
                 target[j+1] = target[j];
                 // first int is equal to temp
                 target[j] = temp;
-                // result: the second integer gets put in place of the first,
-                // the two numbers get swapped in place as long as the numbers given
-                // do not follow the order of the sort
+                /* result: the second integer gets put in place of the first,
+                 * the two numbers get swapped in place as long as the numbers given
+                 * do not follow the order of the sort... the 'temp' variable is used
+                 * to temporarily store the value to be swapped */
             }
         }
     }
 
     return target;
-    // return target int
+    // return target array of ints
 }
 
 int sorted_order(int a, int b)
@@ -88,7 +94,7 @@ int strange_order(int a, int b)
         // return 0 if one of the number's zero
         return 0;
     } else {
-        // return the rest of a : b (WAT)
+        // return the remainder of a divided by b (WAT)
         return a % b;
     }
 }
@@ -108,6 +114,16 @@ void test_sorting(int *numbers, int count, compare_cb cmp)
     printf("\n");
 
     free(sorted);
+
+    /* This part here prints the raw assembler byte code (hex numbers) 
+     * of the pointer function, each time displaying one of the
+     * different 'order' functions called by test_sorting() */
+    unsigned char *data = (unsigned char *)cmp;
+
+    for(i = 0; i < 25; i++) {
+        printf("%02x:", data[i]);
+    }
+    printf("\n");
 }
 
 int main(int argc, char *argv[])
@@ -121,7 +137,9 @@ int main(int argc, char *argv[])
     // 'inputs' is a pointer to the argv array, adding 1 for correct indexing
     char **inputs = argv + 1;
 
-    int *numbers = malloc(count *sizeof(int));
+    // initialising an array of numbers on the heap,
+    // with the size equal to the number of arguments.
+    int *numbers = malloc(count * sizeof(int));
     if(!numbers) die("Memory error.");
 
     for(i = 0; i < count; i++) {
@@ -132,6 +150,13 @@ int main(int argc, char *argv[])
     test_sorting(numbers, count, sorted_order);
     test_sorting(numbers, count, reverse_order);
     test_sorting(numbers, count, strange_order);
+
+    /* Extra Credit stuff:
+     * test_sorting(numbers, count, NULL); => Jump to invalid memory address, SIGSEGV
+     * test_sorting(numbers, count, die); => Compiler complains about wrong function type */
+
+     // TODO: use an hexeditor to find the 'order' functions, write another sorting algorithm 
+     // and change test_sorting() to accept another sort function
 
     free(numbers);
 
