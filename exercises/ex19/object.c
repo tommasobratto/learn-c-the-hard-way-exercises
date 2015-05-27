@@ -1,3 +1,4 @@
+/* This file serves the purpose of defining the functions declared in "object.h". */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,7 +14,8 @@ void Object_destroy(void *self)
         free(obj);
     }
 }
-/* This is an template/prototype-like collection of functions
+
+/* This is a template/prototype-like collection of functions
  * related to structs that contain the 'Object' struct, essentially
  * inheriting the functions and variables under Object */ 
 
@@ -53,11 +55,13 @@ void *Object_new(size_t size, Object proto, char *description)
 
     // change allocation of object pointer,
     // to accomodate for different instances of Object struct
+    // for example, Room or Monster.
+    
     Object *el = calloc(1, size);
     *el = proto;
 
     // copy the description
-    el->description = strdup(description)
+    el->description = strdup(description);
 
     // initialize it
     if(!el->init(el)) {
