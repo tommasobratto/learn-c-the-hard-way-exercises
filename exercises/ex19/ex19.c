@@ -100,7 +100,6 @@ void *Map_move(void *self, Direction direction)
         printf("You can't go there");
     }
 
-    assert(next != NULL);
     return next;
 }
 
