@@ -149,7 +149,6 @@ int process_input(Map *game)
 {
     printf("\n> ");
 
-    char cha;
     char ch = getchar();
     getchar();
 
@@ -190,9 +189,7 @@ int process_input(Map *game)
             break;
 
         default:
-            // ch is the character pressed.
-            cha = ch;
-            printf("What?: %c isn't valid\n", cha);
+            printf("What?: %c isn't valid\n", ch);
     }
 
     return 1;
