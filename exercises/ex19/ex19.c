@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <assert.h>
 #include "ex19.h"
 
 int Monster_attack(void *self, int damage)
@@ -58,8 +59,11 @@ void *Room_move(void *self, Direction direction)
 
     if(next) {
         next->_(describe)(next);
+    } else {
+        printf("There's nothing there");
     }
 
+    assert(next != NULL);
     return next;
 }
 
@@ -92,8 +96,11 @@ void *Map_move(void *self, Direction direction)
 
     if(next) {
         map->location = next;
+    } else {
+        printf("You can't go there");
     }
 
+    assert(next != NULL);
     return next;
 }
 
@@ -102,6 +109,7 @@ int Map_attack(void *self, int damage)
     Map *map = self;
     Room *location = map->location;
 
+    assert(location != NULL);
     return location->_(attack)(location, damage);
 }
 
@@ -141,6 +149,7 @@ int process_input(Map *game)
 {
     printf("\n> ");
 
+    char cha;
     char ch = getchar();
     getchar();
 
@@ -181,7 +190,9 @@ int process_input(Map *game)
             break;
 
         default:
-            printf("What?: %d\n", ch);
+            // ch is the character pressed.
+            cha = ch;
+            printf("What?: %c isn't valid\n", cha);
     }
 
     return 1;

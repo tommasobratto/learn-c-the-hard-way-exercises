@@ -10,6 +10,8 @@ void Object_destroy(void *self)
     Object *obj = self;
 
     if(obj) {
+        assert(obj != NULL);
+        
         if(obj->description) free(obj->description);
         free(obj);
     }
@@ -69,6 +71,7 @@ void *Object_new(size_t size, Object proto, char *description)
         el->destroy(el);
         return NULL;
     } else {
+        assert(el != NULL);
         // object initialised correctly
         return el;
     }

@@ -1,5 +1,27 @@
 // Printing info about variable/pointer memory addresses and bytesizes
 #include <stdio.h>
+#include <stdlib.h>
+
+int sum(int number, int number2)
+{
+    return number + number2;
+}
+
+struct Object {
+    int number;
+    int number2;
+    int sum;
+};
+
+struct Object *Object_new(int number, int number2)
+{   
+    struct Object *obj = malloc(sizeof(struct Object));
+
+    obj->number = number;
+    obj->number2 = number2;
+
+    return obj;
+}
 
 int main(int argc, char *argv[])
 {
@@ -36,5 +58,14 @@ int main(int argc, char *argv[])
     printf("Bytesize of '*c': %lu\n", sizeof(*c));
     printf("Bytesize of '*d': %lu\n", sizeof(*d));
 
+    // declaring and accessing an attribute of a struct
+    // with an initialiser function
+    struct Object *obj = Object_new(2, 2);
+
+    obj->sum = sum(obj->number, obj->number2);
+
+    printf("\nThe sum of the numbers stored in 'obj' is %d\n\n", obj->sum);
+
+    free(obj);
     return 0;
 }
