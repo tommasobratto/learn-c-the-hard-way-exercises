@@ -60,10 +60,9 @@ void *Room_move(void *self, Direction direction)
     if(next) {
         next->_(describe)(next);
     } else {
-        printf("There's nothing there");
+        printf("There's nothing there\n");
     }
 
-    assert(next != NULL);
     return next;
 }
 

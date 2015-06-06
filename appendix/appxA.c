@@ -13,6 +13,8 @@ struct Object {
     int sum;
 };
 
+// Note: 'struct Object *Object_new()' is a function returning a pointer,
+// while for example 'struct Object (*object_new)()' would be a function pointer
 struct Object *Object_new(int number, int number2)
 {   
     struct Object *obj = malloc(sizeof(struct Object));
